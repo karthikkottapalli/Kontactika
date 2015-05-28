@@ -4,13 +4,24 @@ class Contact
   attr_accessor :name,:gender,:address,:phone
 
   def initialize(name, gender, address, phone)
-    @name = name.upcase
+    @name = name
     @address = address
     @phone = phone
-    @gender = gender.upcase
+    @gender = gender
+  end
+
+  def match(str)
+    long_str = @name + " " + @address + " " + @gender    
+    phone_str = " "
+    @phone.each do |phone|
+      phone_str = phone.type + " " +phone.number
+      long_str = long_str + phone_str
+    end
+    (long_str + phone_str).include?(str)   
   end
 
   def to_s
+    puts ""
     puts "Name: " + @name.to_s
     puts "Address: " + @address.to_s
     puts ""
